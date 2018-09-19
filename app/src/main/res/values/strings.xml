@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndroidCamera2Demo</string>
+
+    <string name="request_permission">This sample needs camera permission.</string>
+</resources>
