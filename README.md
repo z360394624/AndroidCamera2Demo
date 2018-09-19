@@ -55,7 +55,7 @@ demo地址在Github
 
 此出需要使用ImageReader。通过    
     
-    ImageReader.newInstance(int width, int height, int format, int maxImages) $$  
+    ImageReader.newInstance(int width, int height, int format, int maxImages)
 创建ImageReader对象，该方法的第三个参数format需要根据不同场景传入不同的值，如果需要YUV数据就传入google推荐的format参数    
     
     ImageFormat.YUV_420_888 
