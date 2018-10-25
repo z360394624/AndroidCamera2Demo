@@ -68,11 +68,25 @@ demo地址在Github
 在onImageAvailable方法中通过reader对象即可获取到YUV_420_888的byte数据，具体代码如下：    
 
 
+        /** image.planes数字保存了YUV的三个分量  */
         val image = reader?.acquireNextImage()
         if (image != null) {
-            val buffer = image.planes[0].buffer
-            val data = ByteArray(buffer.remaining())
-            buffer.get(data)
+            /** Y */
+            val bufferY = image.planes[0].buffer
+            val bufferYSize = bufferY.remaining()
+            /** U(Cb) */
+            val bufferU = image.planes[1].buffer
+            val bufferUSize = bufferU.remaining()
+            /** V(Cr) */
+            val bufferV = image.planes[2].buffer
+            val bufferVSize = bufferV.remaining()
+
+            /** YUV数据集合 */
+            val data = ByteArray(bufferYSize + bufferUSize + bufferVSize)
+            bufferY.get(data, 0, bufferYSize)
+            bufferU.get(data, bufferYSize, bufferUSize)
+            bufferV.get(data, bufferYSize + bufferUSize, bufferUSize)
+
             Log.d(TAG, "data size = " + data.size + "; $threadName")
             image.close()
         }
